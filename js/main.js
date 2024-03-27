@@ -74,6 +74,17 @@ new Swiper('.promotion .swiper', {
   }
 });
 
+new Swiper('.awards .swiper-container', {
+  autoplay: true,
+  loop: true,
+  slidesPerView: 5,
+  spaceBetween: 30,
+  navigation:{
+    prevEl: '.awards .swiper-prev',
+    nextEl: '.awards .swiper-next'
+  }
+});
+
 
 const promotionEl = document.querySelector('.promotion');
 const promotionToggleBtn = document.querySelector('.toggle-promotion');
@@ -98,7 +109,7 @@ function random(min, max) {
 }
 function floatingObject(selector, delay, size) {
   // gsap.to(요소, 시간, 옵션);
-  gsap.to(selector, random(1.5,2.5), {
+  gsap.to(selector, random(1.5, 2.5), {
     y: 20,
     repeat: -1, //무한반복
     yoyo: true,
@@ -111,13 +122,13 @@ floatingObject('.floating2', .5, 15);
 floatingObject('.floating3', 1.5, 20);
 
 
-const spyEls=document.querySelectorAll('section.scroll-spy');
+const spyEls = document.querySelectorAll('section.scroll-spy');
 spyEls.forEach(function (spyEl) {
   new ScrollMagic
-      .Scene({
-        triggerElement: spyEl, //보여짐 여부를 감시할 요소를 설정
-        triggerHook: .8
-      })
-      .setClassToggle(spyEl, 'show')
-      .addTo(new ScrollMagic.Controller());
+    .Scene({
+      triggerElement: spyEl, //보여짐 여부를 감시할 요소를 설정
+      triggerHook: .8
+    })
+    .setClassToggle(spyEl, 'show')
+    .addTo(new ScrollMagic.Controller());
 });
