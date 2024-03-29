@@ -17,6 +17,7 @@ searchInputEl.addEventListener('blur', function () {
 
 
 const badgeEl = document.querySelector('header .badges');
+const toTopEl = document.querySelector('#to-top');
 
 window.addEventListener('scroll', _.throttle(function () {
   console.log(window.scrollY);
@@ -28,6 +29,10 @@ window.addEventListener('scroll', _.throttle(function () {
       opacity: 0,
       display: 'none'
     });
+    //버튼 보이기
+    gsap.to(toTopEl, .2, {
+      x: 0
+    })
   }
   else {
     //배지 보이기
@@ -36,10 +41,22 @@ window.addEventListener('scroll', _.throttle(function () {
       opacity: 1,
       display: 'block'
     });
+    //버튼 숨기기
+    gsap.to(toTopEl, .2, {
+      x: 100
+    });
   }
 }, 300));
 //0.3초 단위로 실행, 함수가 우르르 실행되는 것을 방지
 // _.throttle(함수, 시간)
+
+toTopEl.addEventListener('click', function () {
+  gsap.to(window, .7, {
+    //화면의 위치는 0픽셀로 옮겨줌
+    scrollTo: 0
+  });
+});
+
 
 const fadeEls = document.querySelectorAll('.visual .fade-in');
 fadeEls.forEach(function (fadeEl, index) {
@@ -79,7 +96,7 @@ new Swiper('.awards .swiper-container', {
   loop: true,
   slidesPerView: 5,
   spaceBetween: 30,
-  navigation:{
+  navigation: {
     prevEl: '.awards .swiper-prev',
     nextEl: '.awards .swiper-next'
   }
@@ -132,3 +149,6 @@ spyEls.forEach(function (spyEl) {
     .setClassToggle(spyEl, 'show')
     .addTo(new ScrollMagic.Controller());
 });
+
+const thisYear = document.querySelector('.this-year');
+thisYear.textContent = new Date().getFullYear();
